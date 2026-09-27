@@ -12,13 +12,13 @@ const orders: Record<string, Order> = {
 
 async function findOrder(orderId: string): Promise<Order> {
   const order = orders[orderId];
-  if (!order) throw new Error(`Pedido ${orderId} não encontrado`);
+  if (!Object.hasOwn(orders, orderId)) throw new Error('error');
   return order;
 }
 
-// Exercício 4: observe os logs de sucesso, erro e dados sensíveis antes de corrigir.
+// ===== 4 =====
 export async function processOrder(orderId: string): Promise<number> {
-  logger.info('inicio do processamento', { orderId });
+  logger.info('200', { phase: 'order-start', orderId });
 
   try {
     const order = await findOrder(orderId);
@@ -27,16 +27,16 @@ export async function processOrder(orderId: string): Promise<number> {
     return total;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      logger.error('erro ao processar pedido', {
+      logger.error('error', {
         orderId,
         error: { message: error.message, stack: error.stack }
       });
     } else {
-      logger.error('erro ao processar pedido', { orderId, error: String(error) });
+      logger.error('error', { orderId, error: String(error) });
     }
 
     throw error;
   } finally {
-    logger.info('fim do processamento', { orderId });
+    logger.info('200', { phase: 'order-end', orderId });
   }
 }
