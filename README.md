@@ -178,3 +178,8 @@ npm test
 ```
 
 Testes: 8 passaram, 0 falharam. Node.js v24.15.0 e Express 5.2.1.
+
+
+## Módulo de testes automatizados com Jest
+
+Laboratório preparado em [exercicios/atividade-jest](exercicios/atividade-jest/README.md), com configuração isolada, exemplo de soma e modelos para realizar as atividades 1 a 3.
